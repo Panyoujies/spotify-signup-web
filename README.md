@@ -5,6 +5,9 @@
 # 技术架构
 #### Vite + Vue3.2 + TypeScript
 
+#### 体验地址
+[https://spotify.zlianyun.cn](https://spotify.zlianyun.cn)
+
 # 前置要求
 #### Node
 `node` 需要 `^16 || ^18 || ^19` 版本（`node >= 14` 需要安装 fetch polyfill），使用 nvm 可管理本地多个 `node` 版本
