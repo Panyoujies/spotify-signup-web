@@ -17,7 +17,7 @@ node -v
 #### PNPM
 如果你没有安装过 `pnpm`
 ```js
-npm install pnpm -g
+npm install -g yarn
 ```
 # 安装依赖
 > 由于Spotify政策，本项目不提供后端相关代码，仅供前端习惯学习与讨论。
