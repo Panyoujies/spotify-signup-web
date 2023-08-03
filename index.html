@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/spotify.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"/>
+    <title>Spotify注册 - 全自动注册只需3秒</title>
+      <style>
+          .bomaos-loading {
+              width: 36px;
+              font-size: 0;
+              display: inline-block;
+              transform: rotate(45deg);
+              animation: loadingRotate 1.2s infinite linear;
+              position: relative;
+              top: calc(50% - 18px);
+              left: calc(50% - 18px);
+          }
+
+          .bomaos-loading span {
+              width: 10px;
+              height: 10px;
+              margin: 4px;
+              border-radius: 50%;
+              background: #31c27c;
+              display: inline-block;
+              opacity: 0.9;
+          }
+
+          .bomaos-loading span:nth-child(2) {
+              opacity: 0.7;
+          }
+
+          .bomaos-loading span:nth-child(3) {
+              opacity: 0.5;
+          }
+
+          .bomaos-loading span:nth-child(4) {
+              opacity: 0.3;
+          }
+
+          @keyframes loadingRotate {
+              to {
+                  transform: rotate(405deg);
+              }
+          }
+
+          #app > .bomaos-loading {
+              position: fixed;
+          }
+      </style>
+  </head>
+  <body>
+    <div id="app">
+        <div class="bomaos-loading">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

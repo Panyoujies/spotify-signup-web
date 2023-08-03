@@ -1,0 +1,52 @@
+@import './transition/index.less';
+
+@black: #000;
+@shadow-2: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+0 9px 28px 8px rgba(0, 0, 0, 0.05);
+@modal-mask-bg: fade(@black, 45%);
+
+/* 加载框 */
+.ant-message-notice.bomaos-message-loading {
+  transition: opacity 0.2s, margin 0.3s;
+  position: relative;
+
+  & > .ant-message-notice-content {
+    &::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    & > .ant-message-loading {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  &.ant-move-up-enter.ant-move-up-enter-active,
+  &.ant-move-up-leave.ant-move-up-leave-active {
+    margin-top: -58px;
+    opacity: 0;
+  }
+
+  // 遮罩
+  &.ele-message-mask > .ant-message-notice-content {
+    box-shadow: @shadow-2, 0 0 0 1000vw @modal-mask-bg;
+  }
+
+  // 居中
+  &.ele-message-center {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
