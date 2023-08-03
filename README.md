@@ -3,7 +3,7 @@
 > 声明：此项目只发布于 GitHub，基于 MIT 协议，免费且作为开源学习使用。并且不会有任何形式的出售、付费服务、讨论群、讨论组等行为。谨防受骗。
 
 # 技术架构
-#### Vite + Vue3.2 + TypeScript
+#### Vite + Vue3.2 + TypeScript + Ant Design Vue 4.0.0
 
 #### 体验地址
 [https://spotify.zlianyun.cn](https://spotify.zlianyun.cn)
