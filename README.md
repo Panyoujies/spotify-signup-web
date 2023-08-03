@@ -15,7 +15,7 @@
 node -v
 ```
 #### PNPM
-如果你没有安装过 `pnpm`
+如果你没有安装过 `yarn`
 ```js
 npm install -g yarn
 ```
