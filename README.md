@@ -1,12 +1,12 @@
 # SpotifySignup Web
 
 > 声明：此项目只发布于 GitHub，基于 MIT 协议，免费且作为开源学习使用。并且不会有任何形式的出售、付费服务、讨论群、讨论组等行为。谨防受骗。
-
-![WX20230804-001838@2x.png](https://bomaos-1300119114.cos.ap-nanjing.myqcloud.com/spotify/cfb7892b2447a39e21cb023e6a815705.png "WX20230804-001838@2x.png")
-![WX20230804-002052@2x.png](https://bomaos-1300119114.cos.ap-nanjing.myqcloud.com/spotify/b0421999534dbb55988a481d1192a1b1.png "WX20230804-002052@2x.png")
-![WX20230804-002012@2x.png](https://bomaos-1300119114.cos.ap-nanjing.myqcloud.com/spotify/dd4de16d27dd22e663aa505dff10e394.png "WX20230804-002012@2x.png")
-![WX20230804-001937@2x.png](https://bomaos-1300119114.cos.ap-nanjing.myqcloud.com/spotify/a96da3c59d94c864c8cc123b98e50eb1.png "WX20230804-001937@2x.png")
-![WX20230804-001907@2x.png](https://bomaos-1300119114.cos.ap-nanjing.myqcloud.com/spotify/b0bcb374a81535017782e732ede84938.png "WX20230804-001907@2x.png")
+> 
+![WX20230804-001838@2x](https://github.com/Panyoujies/spotify-signup-web/assets/7311788/1bf70d23-bdf0-4529-b96c-aa33a7a18077)
+![WX20230804-002052@2x](https://github.com/Panyoujies/spotify-signup-web/assets/7311788/22feb0a4-7006-4151-be96-795662b14455)
+![WX20230804-001937@2x](https://github.com/Panyoujies/spotify-signup-web/assets/7311788/c26945e7-e2ef-4a39-8b8d-20ad9f081d09)
+![WX20230804-001907@2x](https://github.com/Panyoujies/spotify-signup-web/assets/7311788/db0c33d5-af65-41b8-9fd0-6ec61b7bd159)
+![WX20230804-002012@2x](https://github.com/Panyoujies/spotify-signup-web/assets/7311788/cf95f4bf-0499-463c-9b42-f242e93d5b5c)
 
 # 技术架构
 #### Vite + Vue3.2 + pinia + TypeScript + Ant Design Vue 4.0.0
