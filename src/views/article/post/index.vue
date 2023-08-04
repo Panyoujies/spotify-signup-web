@@ -77,17 +77,19 @@ const onPlayer = (player: Player) => {
  * @param id
  */
 const query = (id?: number) => {
-  loading.value = true;
-  getArticle(id).then((d) => {
-    article.value = d;
-    if (d.isVideo == 1) {
-      config.url = d.videoUrl as string;
-      config.poster = d.videoCover as string;
-    }
-    loading.value = false;
-  }).catch((error) => {
-    loading.value = false;
-  })
+  if (id) {
+    loading.value = true;
+    getArticle(id).then((d) => {
+      article.value = d;
+      if (d.isVideo == 1) {
+        config.url = d.videoUrl as string;
+        config.poster = d.videoCover as string;
+      }
+      loading.value = false;
+    }).catch((error) => {
+      loading.value = false;
+    })
+  }
 }
 
 /* 初始化数据 */
@@ -101,11 +103,11 @@ watch(currentRoute, (route) => {
 </script>
 
 <template>
-  <a-spin tip="文章内容获取中..." :spinning="loading" size="large">
+  <a-spin tip="文章内容获取中..." :spinning="loading" size="large" :bodyStyle="{ minHeight: 'calc(100vh - 225px)' }">
     <a-card v-if="article.isVideo == 1" :bordered="false" style="margin-bottom: 15px">
       <bomaos-xg-player :config="config" @player="onPlayer" />
     </a-card>
-    <a-card :title="article.title" :bordered="false" :bodyStyle="{ minHeight: article.isVideo == 0 ? 'calc(100vh - 225px)' : '100%' }">
+    <a-card :title="article.title" :bordered="false" :bodyStyle="{ minHeight: '200px' }">
       <div class="markdown-body" v-html="text"></div>
     </a-card>
   </a-spin>
