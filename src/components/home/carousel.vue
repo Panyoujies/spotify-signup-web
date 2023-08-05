@@ -58,14 +58,14 @@ onMounted(() => {
     height: 4px;
     margin: 0 3px;
     border-radius: 4px;
-    background-color: rgba(155, 142, 142, 0.4);
+    background-color: rgb(255 255 255 / 40%);
     transition: width 0.3s, background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
   }
 
   li.is-active {
     width: 20px;
-    background: #5e5e5e;
+    background: #ffffff;
   }
 }
 </style>
