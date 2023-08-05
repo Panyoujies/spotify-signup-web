@@ -94,7 +94,7 @@ onMounted(() => {
         </a-card>
       </a-col>
       <a-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
-        <router-view v-slot="{ Component }">
+        <router-view v-slot="{ Component }" :key="$route.fullPath">
           <div style="flex: 1;">
             <transition name="fade-slide-y" mode="out-in">
               <component :is="Component"/>
@@ -107,7 +107,6 @@ onMounted(() => {
 </template>
 
 <style scoped lang="less">
-
 .van-cell {
   position: relative;
   display: flex;

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {getArticle} from "@/api/contents/article";
-import {useRoute, useRouter} from "vue-router";
+import {onBeforeRouteLeave, onBeforeRouteUpdate, useRoute, useRouter} from "vue-router";
 import {Article} from "@/api/contents/article/model";
 import MarkdownIt from 'markdown-it';
 import mdKatex from '@traptitech/markdown-it-katex';
@@ -13,11 +13,15 @@ import '@/styles/lib/highlight.less';
 import '@/styles/lib/github-markdown.less';
 import type Player from "xgplayer";
 import BomaosXgPlayer from "@/plugin/bomaos-xg-player/index";
+import {useBasicLayout} from "@/hooks/useBasicLayout";
+import {copyToClip} from "@/utils/copy";
+const { isMobile } = useBasicLayout();
 
 const { params } = useRoute();
 const { currentRoute } = useRouter();
 const article = ref<Article>({});
 const loading = ref(false);
+const textRef = ref<HTMLElement>()
 
 const mdi = new MarkdownIt({
   html: false,
@@ -43,6 +47,46 @@ const text = computed(() => {
 function highlightBlock(str: string, lang?: string) {
   return `<pre class="code-block-wrapper"><div class="code-block-header"><span class="code-block-header__lang">${lang}</span><span class="code-block-header__copy">复制代码</span></div><code class="hljs code-block-body ${lang}">${str}</code></pre>`
 }
+
+function addCopyEvents() {
+  if (textRef.value) {
+    const copyBtn = textRef.value.querySelectorAll('.code-block-header__copy')
+    copyBtn.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const code = btn.parentElement?.nextElementSibling?.textContent
+        if (code) {
+          copyToClip(code).then(() => {
+            btn.textContent = '复制成功'
+            setTimeout(() => {
+              btn.textContent = '复制代码'
+            }, 1000)
+          })
+        }
+      })
+    })
+  }
+}
+
+function removeCopyEvents() {
+  if (textRef.value) {
+    const copyBtn = textRef.value.querySelectorAll('.code-block-header__copy')
+    copyBtn.forEach((btn) => {
+      btn.removeEventListener('click', () => {})
+    })
+  }
+}
+
+onMounted(() => {
+  addCopyEvents()
+})
+
+onUpdated(() => {
+  addCopyEvents()
+})
+
+onUnmounted(() => {
+  removeCopyEvents()
+})
 
 const config = reactive({
   id: 'demoPlayer1',
@@ -96,19 +140,34 @@ const query = (id?: number) => {
 onMounted(() => {
   query(params.id as unknown as number);
 })
-
-watch(currentRoute, (route) => {
-  query(route.params.id as unknown as number);
-})
 </script>
 
 <template>
-  <a-spin tip="文章内容获取中..." :spinning="loading" size="large" :bodyStyle="{ minHeight: 'calc(100vh - 225px)' }">
-    <a-card v-if="article.isVideo == 1" :bordered="false" style="margin-bottom: 15px">
-      <bomaos-xg-player :config="config" @player="onPlayer" />
+  <a-spin tip="文章内容获取中..." :spinning="loading" size="large" style="min-height: calc(100vh - 169px)">
+    <a-card
+        v-if="article.isVideo == 1"
+        :bordered="false"
+        style="margin-bottom: 15px"
+        :bodyStyle="{
+          padding: isMobile ? '15px' : '24px'
+        }"
+    >
+      <bomaos-xg-player :config="config" @player="onPlayer"/>
     </a-card>
-    <a-card :title="article.title" :bordered="false" :bodyStyle="{ minHeight: '200px' }">
-      <div class="markdown-body" v-html="text"></div>
+    <a-card
+        :title="article.title"
+        :bordered="false"
+        :head-style="{
+          padding: isMobile ? '0 15px' : '0 24px'
+        }"
+        :bodyStyle="{
+          minHeight: loading ? 'calc(100vh - 169px)' : '200px',
+          padding: isMobile ? '15px' : '24px'
+        }"
+    >
+      <div ref="textRef">
+        <div class="markdown-body" v-html="text"></div>
+      </div>
     </a-card>
   </a-spin>
 </template>
