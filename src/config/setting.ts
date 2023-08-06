@@ -31,6 +31,5 @@ export const WHITE_LIST: string[] = [
     '/',
     '/password-reset',
     '/download',
-    '/reset-tutorial',
     '/social-login'
 ];

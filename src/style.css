@@ -118,6 +118,18 @@ a {
   top: 15px;
 }
 
+.xgplayer-skin-default {
+  border-radius: 6px;
+}
+
+.xgplayer-skin-default.xgplayer-nostart .xgplayer-poster {
+  border-radius: 6px;
+}
+
+.xgplayer-skin-default video {
+  border-radius: 5px;
+}
+
 #crisp-chatbox .cc-kxkl .cc-nsge .cc-imbb {
   display: none !important;
 }

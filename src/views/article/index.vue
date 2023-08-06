@@ -5,12 +5,14 @@ import {useBasicLayout} from "@/hooks/useBasicLayout";
 import {useRoute, useRouter} from "vue-router";
 const { isMobile } = useBasicLayout();
 const { push } = useRouter();
+import { UserOutlined, EyeOutlined } from '@ant-design/icons-vue';
 
 const articleList = ref<Article[]>([]);
 const loading = ref(false);
 const disabled = ref(false);
 const page = ref<number>(0)
 const state = ref(true);
+const tolal = ref<number>(0);
 
 const handleInfiniteOnLoad = () => {
   page.value++;
@@ -30,6 +32,7 @@ const supportPage = (limit?: number, page?: number) => {
   loading.value = true;
   setTimeout(() => {
     pageArticles({ limit, page }).then((res) => {
+      tolal.value = res.total;
       if (res.total === 0) {
         state.value = true;
         return;
@@ -49,7 +52,6 @@ const supportPage = (limit?: number, page?: number) => {
   }, 100)
 }
 
-
 onMounted(() => {
   page.value = 0;
   handleInfiniteOnLoad();
@@ -60,32 +62,59 @@ onMounted(() => {
   <div style="margin: 15px 0">
     <a-row :gutter="[15, 15]">
       <a-col v-if="!isMobile" :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
-        <a-card title="文章列表" :bordered="false" class="sticky-article" :bodyStyle="{ padding: 0 }" >
-          <n-scrollbar style="height: calc(100vh - 356px);">
-            <router-link
-                class="van-cell van-cell--clickable"
-                role="button"
-                tabindex="0"
-                v-for="item in articleList"
-                :key="item.id"
-                :to="'/article/' + item.id"
-                active-class="bomaos-this"
-            >
-              <div class="van-cell__title">
-                <n-ellipsis :line-clamp="2">
-                  <span>{{ item.title as string }}</span>
-                </n-ellipsis>
-                <div class="van-cell__label">
-                  <div v-time="item.createTime"></div>
+        <a-card
+            title="文章列表"
+            :bordered="false"
+            class="sticky-article"
+            :head-style="{
+              padding: '0 20px'
+            }"
+            :bodyStyle="{ padding: 0 }"
+        >
+          <template #extra>
+            共 {{ tolal }} 篇文章
+          </template>
+          <a-spin tip="Loading..." :spinning="loading">
+            <n-scrollbar style="height: calc(100vh - 356px);">
+              <router-link
+                  class="van-cell van-cell--clickable"
+                  role="button"
+                  tabindex="0"
+                  v-for="item in articleList"
+                  :key="item.id"
+                  :to="'/article/' + item.id"
+                  active-class="bomaos-this"
+              >
+                <div style="margin-right: 10px">
+                  <a-avatar shape="square" :size="50" :src="item.cover">
+                    <template #icon><UserOutlined /></template>
+                  </a-avatar>
                 </div>
+                <div class="van-cell__title">
+                  <n-ellipsis :line-clamp="2">
+                    <span>{{ item.title as string }}</span>
+                  </n-ellipsis>
+                  <div class="van-cell__label">
+                    <a-space :size="0">
+                      <template #split>
+                        <a-divider type="vertical" />
+                      </template>
+                      <div v-time="item.createTime" style="font-size: 12px"></div>
+                      <div style="font-size: 12px; display: flex; align-items: center;">
+                        <eye-outlined />
+                        <span style="margin-left: 5px">{{ item.likes }}</span>
+                      </div>
+                    </a-space>
+                  </div>
+                </div>
+              </router-link>
+              <div v-if="!loading" style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: center;">
+                <a-button type="primary" shape="round" size="middle" :loading="loading" :disabled="disabled" @click="handleInfiniteOnLoad">
+                  {{ disabled ? '加载完成' : '加载更多' }}
+                </a-button>
               </div>
-            </router-link>
-            <div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: center;">
-              <a-button type="primary" shape="round" size="middle" :loading="loading" :disabled="disabled" @click="handleInfiniteOnLoad">
-                {{ disabled ? '加载完成' : '加载更多' }}
-              </a-button>
-            </div>
-          </n-scrollbar>
+            </n-scrollbar>
+          </a-spin>
           <template #actions>
             <div class="bomaos-footer">
               <a-alert message="提供一站式Spotify帮助与服务、支持注册、修改密码、解锁14天、下载、会员订阅等专业的解决方案" type="info"/>
@@ -112,7 +141,7 @@ onMounted(() => {
   display: flex;
   box-sizing: border-box;
   width: 100%;
-  padding: 10px 21px;
+  padding: 10px 17px;
   overflow: hidden;
   color: #000000;
   font-size: 14px;

@@ -149,7 +149,7 @@ onMounted(() => {
         :bordered="false"
         style="margin-bottom: 15px"
         :bodyStyle="{
-          padding: isMobile ? '15px' : '24px'
+          padding: isMobile ? '15px' : '20px'
         }"
     >
       <bomaos-xg-player :config="config" @player="onPlayer"/>
@@ -158,11 +158,11 @@ onMounted(() => {
         :title="article.title"
         :bordered="false"
         :head-style="{
-          padding: isMobile ? '0 15px' : '0 24px'
+          padding: isMobile ? '0 15px' : '0 20px'
         }"
         :bodyStyle="{
           minHeight: loading ? 'calc(100vh - 169px)' : '200px',
-          padding: isMobile ? '15px' : '24px'
+          padding: isMobile ? '15px' : '20px'
         }"
     >
       <div ref="textRef">
